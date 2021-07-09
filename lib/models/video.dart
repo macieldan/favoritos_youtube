@@ -6,7 +6,7 @@ class Video {
 
   Video({this.id, this.title, this.thump, this.channel});
 
-  factory Video.fromJson(Map<String, dynamic> json) {
+  factory Video.fromJson(Map<dynamic, dynamic> json) {
     return Video(
         id: json["id"]["videoId"],
         title: json["snippet"]["title"],
