@@ -37,6 +37,8 @@ class DataSearch extends SearchDelegate<String> {
   }
 
   suggestions(String search) async {
-    //http.Response response = await http.get(Uri.parse(uri))
+    http.Response response = await http.get(Uri.parse(
+      "http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&client=firefox&q=$search"
+    ))
   }
 }
