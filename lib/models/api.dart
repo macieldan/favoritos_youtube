@@ -10,16 +10,17 @@ class Api {
     http.Response response = await http.get(Uri.parse(
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$search&type=video&key=$API_KEY&maxResults=10"));
 
-    decode(response);
+    return decode(response);
   }
 
   List<Video> decode(http.Response response) {
     if (response.statusCode == 200) {
-      Map decode = json.decode(response.body);
-      print(decode);
+      var decode = json.decode(response.body);
+      // print(decode);
       List<Video> videos = decode["items"].map<Video>((map) {
         return Video.fromJson(map);
       }).toList();
+      return videos;
 
       //print(videos);
     } else {

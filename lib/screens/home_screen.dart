@@ -2,7 +2,6 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:favoritos_youtube/blocs/videos_bloc.dart';
 import 'package:favoritos_youtube/delegates/data_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatelessWidget {
   //const Home({ Key? key }) : super(key: key);
@@ -32,14 +31,22 @@ class Home extends StatelessWidget {
                 context: context,
                 delegate: DataSearch(),
               );
-              if (results != null) ;
-              //BlocProvider.
+              if (results != null)
+                BlocProvider.getBloc<VideosBloc>().inSearch.add(results);
             },
             icon: Icon(Icons.search),
           ),
         ],
       ),
-      body: Container(),
+      body: StreamBuilder(
+        stream: BlocProvider.getBloc<VideosBloc>().outVideos,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(itemBuilder: null);
+          } else
+            return Container();
+        },
+      ),
     );
   }
 }
