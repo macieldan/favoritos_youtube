@@ -1,6 +1,8 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:favoritos_youtube/blocs/videos_bloc.dart';
 import 'package:favoritos_youtube/delegates/data_search.dart';
+import 'package:favoritos_youtube/models/video.dart';
+import 'package:favoritos_youtube/widgets/video_tile.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -9,6 +11,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Container(
           height: 25.0,
@@ -42,7 +45,9 @@ class Home extends StatelessWidget {
         stream: BlocProvider.getBloc<VideosBloc>().outVideos,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(itemBuilder: null);
+            return ListView.builder(itemBuilder: (context, index) {
+              return VideoTile(snapshot.data[index]);
+            });
           } else
             return Container();
         },
