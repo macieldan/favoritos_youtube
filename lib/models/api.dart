@@ -20,7 +20,7 @@ class Api {
 
   Future<List<Video>> nextPage() async {
     http.Response response = await http.get(Uri.parse(
-        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$search&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken"));
+        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_search&type=video&key=$API_KEY&maxResults=$10&pageToken=$_nextToken"));
 
     return decode(response);
   }
@@ -28,7 +28,7 @@ class Api {
   List<Video> decode(http.Response response) {
     if (response.statusCode == 200) {
       var decode = json.decode(response.body);
-
+      print(_search);
       _nextToken = decode["nextPageToken"];
 
       List<Video> videos = decode["items"].map<Video>((map) {
