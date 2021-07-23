@@ -31,7 +31,6 @@ class VideosBloc implements BlocBase {
       videos += await api.nextPage();
     }
 
-    //videos = await api.search(search);
     _videosController.sink.add(videos);
   }
 
