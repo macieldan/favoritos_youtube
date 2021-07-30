@@ -35,11 +35,12 @@ class FavoriteBloc implements BlocBase {
     _saveFav();
   }
 
-  void _saveFav(){
-    SharedPreferences.getInstance().then((prefs){
+  void _saveFav() {
+    SharedPreferences.getInstance().then((prefs) {
       prefs.setString("favorites", json.encode(_favorites));
-    })
+    });
   }
+
   @override
   void dispose() {
     _favController.close();
