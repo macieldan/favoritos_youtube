@@ -10,12 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class FavoriteBloc implements BlocBase {
   Map<String, Video> _favorites = {};
 
-  final _favController =
-      BehaviorSubject<Map<String, Video>>();
+  final _favController = BehaviorSubject<Map<String, Video>>();
   Stream<Map<String, Video>> get outFav => _favController.stream;
 
   FavoriteBloc() {
     SharedPreferences.getInstance().then((prefs) {
+      prefs.clear();
       if (prefs.getKeys().contains("favorites")) {
         _favorites = json.decode(prefs.getString("favorites")).map((k, v) {
           return MapEntry(k, Video.fromJson(v));

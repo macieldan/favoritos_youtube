@@ -11,6 +11,7 @@ class Favorites extends StatelessWidget {
     final bloc = BlocProvider.getBloc<FavoriteBloc>();
 
     return Scaffold(
+      backgroundColor: Colors.black87,
       appBar: AppBar(
         title: Text("Favorites"),
         centerTitle: true,
@@ -18,6 +19,7 @@ class Favorites extends StatelessWidget {
       ),
       body: StreamBuilder<Map<String, Video>>(
         stream: bloc.outFav,
+        initialData: {},
         builder: (context, snapshot) {
           return ListView(
             children: snapshot.data.values.map((v) {
