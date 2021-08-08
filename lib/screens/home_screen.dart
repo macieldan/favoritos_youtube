@@ -12,6 +12,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final blocFavorito = BlocProvider.getBloc<FavoriteBloc>();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -25,7 +26,7 @@ class Home extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: StreamBuilder<Map<String, Video>>(
-              stream: BlocProvider.getBloc<FavoriteBloc>().outFav,
+              stream: blocFavorito.outFav,
               builder: (context, snapshot) {
                 if (snapshot.hasData)
                   return Text("${snapshot.data.length}");
@@ -56,7 +57,7 @@ class Home extends StatelessWidget {
       ),
       body: StreamBuilder(
         stream: BlocProvider.getBloc<VideosBloc>().outVideos,
-        initialData: [],
+        initialData: ListView.builder(itemBuilder: ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
