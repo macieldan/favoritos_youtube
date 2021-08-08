@@ -57,7 +57,9 @@ class Home extends StatelessWidget {
       ),
       body: StreamBuilder(
         stream: BlocProvider.getBloc<VideosBloc>().outVideos,
-        initialData: ListView.builder(itemBuilder: ),
+        initialData: [
+          
+        ], //ListView.builder(itemBuilder: ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
